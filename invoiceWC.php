@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: Invoice
+  Plugin Name: Invoice WC Integration
   Plugin URI:  http://invoice.su
   Description: Invoice WC integration
   Version: 1.0.0
