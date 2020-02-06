@@ -20,6 +20,7 @@ require_once "sdk/CREATE_PAYMENT.php";
 require_once "sdk/common/SETTINGS.php";
 require_once "sdk/common/ORDER.php";
 require_once "sdk/common/ITEM.php";
+require_once "sdk/CREATE_TERMINAL.php";
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -67,6 +68,10 @@ function invoice_gateway()
             $terminal = explode("/",$terminal);
             $terminal = substr($terminal[1],1);
             $this->terminal = $terminal;
+
+            if($terminal == null or $terminal == "") {
+                $this->createTerminal();
+            }
 
             add_action('woocommerce_receipt_invoice', array($this, 'receipt_page'));
             add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
@@ -118,6 +123,18 @@ function invoice_gateway()
                 '<input type="submit" class="button alt" name="submit_invoice" value="'.__('Оплатить', 'invoice').'" />
 			        <a class="button cancel" href="'.$order->get_cancel_order_url().'">'.__('Отменить заказ', 'invoice').'</a>'."\n".
                 '</form>';
+        }
+
+        public function createTerminal() {
+            $create_terminal = new CREATE_TERMINAL();
+            $create_terminal->type = "dynamical";
+            $create_terminal->name = get_bloginfo('name');
+            $create_terminal->description = get_bloginfo('description');
+            $create_terminal->defaultPrice = 0;
+            $terminal = $this->invoiceClient->CreateTerminal($create_terminal);
+
+            $this->update_option("terminal", $terminal->link);
+            $this->terminal = $terminal->id;
         }
 
         /**
@@ -184,7 +201,7 @@ function invoice_gateway()
                 'terminal' => array(
                     'title' => __('Terminal', 'invoice'),
                     'type' => 'text',
-                    'description' => __('Ссылка на терминал оплаты', 'invoice'),
+                    'description' => __('Ссылка на терминал оплаты(Необязательно)', 'invoice'),
                     'default' => ''
                 ),
             );

@@ -12,8 +12,4 @@ class GET_TERMINAL
      */
     public $id;
 
-    public function __construct($alias)
-    {
-        $this->alias = $alias;
-    }
 }
