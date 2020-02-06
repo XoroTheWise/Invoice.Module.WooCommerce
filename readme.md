@@ -2,7 +2,7 @@
 
 <h3>Установка</h3>
 
-1. Скопируйте содержимое архива в папку %корень сайта%/wp-content/plugins/
+1. [Скачайте плагин](https://github.com/Invoice-LLC/Invoice.Module.WooCommerce/archive/master.zip) и скопируйте содержимое архива в папку %корень сайта%/wp-content/plugins/
 2. Перейдите во вкладку плагины<br>
 ![Imgur](https://imgur.com/XxHlkuq.png)
 3. Активируйте плагин<br>
