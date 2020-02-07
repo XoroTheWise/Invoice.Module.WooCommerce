@@ -198,12 +198,6 @@ function invoice_gateway()
                     'description' => __('Логин от личного кабинета', 'invoice'),
                     'default' => ''
                 ),
-                'terminal' => array(
-                    'title' => __('Terminal', 'invoice'),
-                    'type' => 'text',
-                    'description' => __('Ссылка на терминал оплаты(Необязательно)', 'invoice'),
-                    'default' => ''
-                ),
             );
         }
 
