@@ -195,8 +195,9 @@ function invoice_gateway()
                 'login' => array(
                     'title' => __('Login', 'invoice'),
                     'type' => 'text',
+                    'placeholder' => '79991234567',
                     'description' => __('Логин от личного кабинета', 'invoice'),
-                    'default' => ''
+                    'default' => '79991234567'
                 ),
             );
         }
