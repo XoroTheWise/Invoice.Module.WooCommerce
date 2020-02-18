@@ -206,32 +206,40 @@ function invoice_gateway()
          * @return string|void
          */
         public function callback() {
-            if(!isset($_POST['id'])) {
+            $postData = file_get_contents('php://input');
+            $notification = json_decode($postData, true);
+
+            if(!isset($notification['id'])) {
                 return;
             }
 
-            $type = $_POST["notification_type"];
-            $id = $_POST["order"]["id"];
+            $type = $notification["notification_type"];
+            $id = $notification["order"]["id"];
 
-            $signature = $_POST["signature"];
+            $signature = $notification["signature"];
 
-            if($signature != $this->getSignature($id, $_POST["status"], $this->api_key)) {
+            if($signature != $this->getSignature($notification["id"], $notification["status"], $this->api_key)) {
                 return "Wrong signature";
             }
 
+            $order = new WC_Order($id);
             if($type == "pay") {
-                $order = new WC_Order($id);
-                if($order->get_subtotal() > $_POST["order"]["amount"]){
+
+                if($order->get_subtotal() > $notification["order"]["amount"]){
                     return "Wrong amount";
                 }
-                if($_POST["status"] == "successful") {
+                if($notification["status"] == "successful") {
                     $order->payment_complete();
                     return "payment successful";
                 }
-                if($_POST["status"] == "error") {
-                    $order->update_status('failed', $_POST["status_description"]);
+                if($notification["status"] == "error") {
+                    $order->update_status('failed', $notification["status_description"]);
                     return "payment failed";
                 }
+            }
+            if($type == "refund") {
+                $order->update_status('refund', "Частичный возврат на сумму ".$notification["amount"]);
+                return "OK";
             }
             return "null";
         }
