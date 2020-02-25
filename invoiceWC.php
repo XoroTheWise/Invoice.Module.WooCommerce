@@ -73,11 +73,11 @@ function invoice_gateway()
 
             if($terminal == null or $terminal == "") {
                 $this->createTerminal();
-                $this->log("Создаем новый терминал");
+                $this->log("Создаем новый терминал \n");
             }
 
             if($this->terminal == null) {
-                $this->log("Текущий терминал недействителен, создаем новый");
+                $this->log("Текущий терминал недействителен, создаем новый \n");
                 $this->createTerminal();
             }
 
@@ -120,7 +120,7 @@ function invoice_gateway()
                 $paymentInfo = $this->createPayment($order);
                 print_r($paymentInfo);
                 if($paymentInfo == null || $paymentInfo->error != null) {
-                    $this->log("ОШИБКА: ".json_encode($paymentInfo));
+                    $this->log("ОШИБКА: ".json_encode($paymentInfo) . "\n");
                     return "Ошибка при создании заказа, попробуйте позже.";
                 } else {
                     $this->log("ПЛАТЕЖ СОЗДАН: ".json_encode($paymentInfo));
