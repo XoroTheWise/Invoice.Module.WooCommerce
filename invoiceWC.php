@@ -41,6 +41,8 @@ function invoice_gateway()
          */
         private $invoiceClient;
 
+        private $terminal;
+
         public function __construct()
         {
             $this->id = 'invoice';
@@ -70,6 +72,12 @@ function invoice_gateway()
             $this->terminal = $terminal;
 
             if($terminal == null or $terminal == "") {
+                $this->createTerminal();
+                $this->log("Создаем новый терминал");
+            }
+
+            if($this->terminal == null) {
+                $this->log("Текущий терминал недействителен, создаем новый");
                 $this->createTerminal();
             }
 
@@ -110,9 +118,12 @@ function invoice_gateway()
 
             if($_POST["submit_invoice"] != null) {
                 $paymentInfo = $this->createPayment($order);
-
+                print_r($paymentInfo);
                 if($paymentInfo == null || $paymentInfo->error != null) {
+                    $this->log("ОШИБКА: ".json_encode($paymentInfo));
                     return "Ошибка при создании заказа, попробуйте позже.";
+                } else {
+                    $this->log("ПЛАТЕЖ СОЗДАН: ".json_encode($paymentInfo));
                 }
 
                 header('Location: '.$paymentInfo->payment_url);
@@ -245,6 +256,12 @@ function invoice_gateway()
          */
         public function getSignature($id, $status, $key) {
             return md5($id.$status.$key);
+        }
+
+        public function log($log) {
+            $fp = fopen('invoice_payment.log', 'a+');
+            fwrite($fp, $log);
+            fclose($fp);
         }
     }
 
