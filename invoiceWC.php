@@ -65,6 +65,7 @@ function invoice_gateway()
             $this->invoiceClient = new RestClient($this->login, $this->api_key);
 
             $terminal = $this->get_option("terminal");
+            $this->log("GetTerminal: ". $terminal . "\n");
             $terminal = str_replace("https://" ,"",$terminal);
             $terminal = str_replace("http://" ,"",$terminal);
             $terminal = explode("/",$terminal);
@@ -222,6 +223,7 @@ function invoice_gateway()
             $notification = json_decode($postData, true);
 
             if(!isset($notification['id'])) {
+                echo "ID not found";
                 return;
             }
 
