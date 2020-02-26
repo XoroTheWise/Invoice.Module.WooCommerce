@@ -85,7 +85,7 @@ function invoice_gateway()
             add_action('woocommerce_receipt_invoice', array($this, 'receipt_page'));
             add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
             add_action('woocommerce_order_status_processing', array($this, 'capture_payment'));
-            add_action('woocommerce_api_wc_' . $this->id, array($this, 'callback'));
+            add_action('woocommerce_api_invoice', array($this, 'callback'));
         }
 
         function process_payment($order_id)
