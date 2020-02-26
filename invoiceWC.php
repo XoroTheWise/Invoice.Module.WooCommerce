@@ -145,6 +145,8 @@ function invoice_gateway()
             $create_terminal->defaultPrice = 0;
             $terminal = $this->invoiceClient->CreateTerminal($create_terminal);
 
+            $this->log("TERMINAL: ". json_encode($terminal). "\n");
+
             $this->update_option("terminal", $terminal->link);
             $this->terminal = $terminal->id;
         }
