@@ -27,23 +27,16 @@ class RestClient
     {
         $request = $this->url . $request_type;
         $auth = base64_encode($this->login . ":" . $this->apiKey);
-        $ch = curl_init($request);
-        curl_setopt($ch, CURLOPT_URL, $request);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
 
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            "Host: pay.invoice.su",
-            "content-type: application/json",
-            "Authorization: Basic ".$auth,
-            "User-Agent: curl/7.55.1",
-            "Accept: */*"
-        ]);
-
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-
-        $response = curl_exec($ch);
-        curl_close($ch);
+        $options = array(
+            'http' => array(
+                'header'  => "Authorization: Basic ".$auth,
+                'method'  => 'POST',
+                'content' => $json
+            )
+        );
+        $context  = stream_context_create($options);
+        $response = file_get_contents($request, false, $context);
 
         return $response;
     }
