@@ -47,8 +47,8 @@ function invoice_gateway()
         {
             $this->id = 'invoice';
             $this->has_fields = false;
-            $this->order_button_text = __('Оплатить через Invoice', 'woocommerce');
-            $this->method_title = __('Invoice', 'woocommerce');
+            $this->order_button_text = __('Оплатить по карте', 'woocommerce');
+            $this->method_title = __('Оплата по карте', 'woocommerce');
 
             $this->method_description = __('Invoice integration for woocomerce.', 'woocommerce');
             $this->supports = array(
