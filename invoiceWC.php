@@ -178,11 +178,12 @@ function invoice_gateway()
 
             $receipt = array();
             foreach ($order->get_items() as $item) {
+		$product = $item->get_product();
                 $invoice_item = new ITEM();
                 $invoice_item->name = $item->get_name();
-                $invoice_item->price = $item->get_subtotal();
+                $invoice_item->price = $product->get_price();
                 $invoice_item->quantity = $item->get_quantity();
-                $invoice_item->resultPrice = $item->get_subtotal();
+                $invoice_item->resultPrice = $item->get_total();
 
                 array_push($receipt, $invoice_item);
             }
