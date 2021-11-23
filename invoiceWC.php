@@ -171,7 +171,7 @@ function invoice_gateway()
             $create_payment->settings = $settings;
 
             $invoice_order = new ORDER();
-            $invoice_order->amount = $order->get_subtotal();
+            $invoice_order->amount = $order->get_total();
             $invoice_order->currency = $order->get_currency();
             $invoice_order->id = $order->get_id();
             $create_payment->order = $invoice_order;
