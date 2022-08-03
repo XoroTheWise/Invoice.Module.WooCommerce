@@ -66,10 +66,6 @@ function invoice_gateway()
 
             $terminal = $this->get_option("terminal");
             $this->log("GetTerminal: ". $terminal . "\n");
-            $terminal = str_replace("https://" ,"",$terminal);
-            $terminal = str_replace("http://" ,"",$terminal);
-            $terminal = explode("/",$terminal);
-            $terminal = substr($terminal[1],1);
             $this->terminal = $terminal;
 
             if($terminal == null or $terminal == "") {
@@ -141,7 +137,13 @@ function invoice_gateway()
             $create_terminal = new CREATE_TERMINAL();
             $create_terminal->type = "dynamical";
             $create_terminal->name = get_bloginfo('name');
+            if($create_terminal->name === ""){
+                $create_terminal->name = "Оплата через Инвойс";
+            }
             $create_terminal->description = get_bloginfo('description');
+            if($create_terminal->description === ""){
+                $create_terminal->name = " ";
+            }
             $create_terminal->defaultPrice = 0;
             $terminal = $this->invoiceClient->CreateTerminal($create_terminal);
             if($terminal == null) {
@@ -178,7 +180,7 @@ function invoice_gateway()
 
             $receipt = array();
             foreach ($order->get_items() as $item) {
-		$product = $item->get_product();
+                $product = $item->get_product();
                 $invoice_item = new ITEM();
                 $invoice_item->name = $item->get_name();
                 $invoice_item->price = $product->get_price();
@@ -216,6 +218,12 @@ function invoice_gateway()
                     'placeholder' => '79991234567',
                     'description' => __('Логин от личного кабинета', 'invoice'),
                     'default' => '79991234567'
+                ),
+                'terminal' => array(
+                    'title' => __('Terminal ID', 'invoice'),
+                    'type' => 'text',
+                    'description' => __('Терминал Инвойс', 'invoice'),
+                    'default' => ''
                 ),
             );
         }
