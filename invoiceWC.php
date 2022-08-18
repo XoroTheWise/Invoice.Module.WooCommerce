@@ -209,6 +209,7 @@ function invoice_gateway()
                 'api_key' => array(
                     'title' => __('API Key', 'invoice'),
                     'type' => 'text',
+		    'placeholder' => 'd9b1d7db4cd6e70935368a1efb10e377',
                     'description' => __('Получить API-ключ вы можете в <a href="https://lk.invoice.su/settings?tab=general">личном кабинете</a>', 'invoice'),
                     'default' => ''
                 ),
@@ -217,7 +218,7 @@ function invoice_gateway()
                     'type' => 'text',
                     'placeholder' => 'd9b1d7db4cd6e70935368a1efb10e377',
                     'description' => __('Получить ID компании вы можете в <a href="https://lk.invoice.su/settings?tab=general">личном кабинете</a>', 'invoice'),
-                    'default' => '79991234567'
+                    'default' => ''
                 ),
                 'terminal' => array(
                     'title' => __('Terminal ID', 'invoice'),
