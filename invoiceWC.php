@@ -209,20 +209,22 @@ function invoice_gateway()
                 'api_key' => array(
                     'title' => __('API Key', 'invoice'),
                     'type' => 'text',
-                    'description' => __('Получить ключ вы можете в <a href="https://lk.invoice.su/">личном кабинете</a>', 'invoice'),
+		    'placeholder' => 'd9b1d7db4cd6e70935368a1efb10e377',
+                    'description' => __('Получить API-ключ вы можете в <a href="https://lk.invoice.su/settings?tab=general">личном кабинете</a>', 'invoice'),
                     'default' => ''
                 ),
                 'login' => array(
-                    'title' => __('Login', 'invoice'),
+                    'title' => __('Merchant ID', 'invoice'),
                     'type' => 'text',
-                    'placeholder' => '79991234567',
-                    'description' => __('Логин от личного кабинета', 'invoice'),
-                    'default' => '79991234567'
+                    'placeholder' => 'd9b1d7db4cd6e70935368a1efb10e377',
+                    'description' => __('Получить ID компании вы можете в <a href="https://lk.invoice.su/settings?tab=general">личном кабинете</a>', 'invoice'),
+                    'default' => ''
                 ),
                 'terminal' => array(
                     'title' => __('Terminal ID', 'invoice'),
                     'type' => 'text',
-                    'description' => __('Терминал Инвойс', 'invoice'),
+		    'placeholder' => 'd9b1d7db4cd6e70935368a1efb10e377',
+                    'description' => __('ID Терминала Инвойс (необязательно)', 'invoice'),
                     'default' => ''
                 ),
             );
