@@ -2,7 +2,7 @@
 
 <h3>Установка</h3>
 
-1. [Скачайте плагин](https://github.com/Invoice-LLC/Invoice.Module.WooCommerce/archive/master.zip) и скопируйте содержимое архива в папку %корень сайта%/wp-content/plugins/
+1. [Скачайте плагин](https://github.com/Invoice-LLC/Invoice.Module.WooCommerce/archive/master.zip) и скопируйте папку "woocommerce-gateway-invoice", в директорию сервера %корень сайта%/wp-content/plugins/
 2. Перейдите во вкладку плагины<br>
 ![Imgur](https://imgur.com/XxHlkuq.png)
 3. Активируйте плагин<br>
@@ -15,5 +15,5 @@
 ![Imgur](https://imgur.com/YUphf8X.png)<br>
 (Все данные вы можете получить в [личном кабинете Invoice](https://lk.invoice.su/))
 6. Добавьте уведомление в личном кабинете Invoice(Вкладка Настройки->Уведомления->Добавить)
-с типом **WebHook** и адресом: **%URL сайта%/?wc-api=invoice**
+с типом **WebHook** и адресом: **%URL сайта%/webhook-handler/**
 ![Imgur](https://imgur.com/LZEozhf.png)
